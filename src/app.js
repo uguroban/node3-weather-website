@@ -7,13 +7,14 @@ const forecast = require('./utils/forecast')
 
 
 const app = express()
-
+const port=process.env.PORT || 3000
 
 
 //define path express config
 const publicDirectoryPath=path.join(__dirname,'../public')
 const viewsPath=path.join(__dirname,'../templates/views')
 const partialPath = path.join(__dirname,'../templates/partials')
+
 
 
 //setup handlebars engine and views location
@@ -66,7 +67,7 @@ app.get('/weather',(req,res) => {
 
             res.send({
                 forecast:forecastData,
-                location,
+                location:location,
                 address:req.query.address
             })
         })
@@ -107,6 +108,6 @@ app.get('*',(req,res) => {
 //app.com/help
 //app.com/about
 
-app.listen(process.env.PORT,() => {
-    console.log('Server is up on port ' + process.env.PORT)
+app.listen(port,() => {
+    console.log('Server is up on port ' + port)
 })
